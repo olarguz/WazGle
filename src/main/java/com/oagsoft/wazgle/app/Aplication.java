@@ -1,5 +1,6 @@
 package com.oagsoft.wazgle.app;
 
+import com.oagsoft.wazgle.view.MapPanel;
 import com.oagsoft.wazgle.tools.FactoryItem;
 import com.sun.glass.events.KeyEvent;
 import java.awt.BorderLayout;

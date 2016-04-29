@@ -1,4 +1,4 @@
-package com.oagsoft.wazgle.app;
+package com.oagsoft.wazgle.data;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

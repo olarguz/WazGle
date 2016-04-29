@@ -1,4 +1,4 @@
-package com.oagsoft.wazgle.app;
+package com.oagsoft.wazgle.data;
 
 import java.awt.Graphics2D;
 
