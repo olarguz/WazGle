@@ -15,6 +15,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.LinkedList;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
@@ -31,7 +32,7 @@ public class MapPanel extends JPanel implements MouseListener, MouseMotionListen
     private boolean grafoVisible;
     private GraphicTrack mouseIndicator;
 
-    public MapPanel(String file)
+    public MapPanel(String file, LinkedList<GraphicObject> graphElement)
     {
         try
         {
@@ -42,16 +43,11 @@ public class MapPanel extends JPanel implements MouseListener, MouseMotionListen
             imageMap = null;
         }
 
+        this.graphElement = graphElement;
         grafoVisible = false;
 
-        graphElement = new LinkedList<>();
-        graphElement.add(new GraphicNode(new Point(25, 140), 20, false));
-        graphElement.add(new GraphicNode(new Point(55, 205), 20, false));
-        graphElement.add(new GraphicNode(new Point(90, 280), 20, true));
-        graphElement.add(new GraphicEdge((GraphicNode)graphElement.get(0), (GraphicNode)graphElement.get(1)));
-        graphElement.add(new GraphicEdge((GraphicNode)graphElement.get(1), (GraphicNode)graphElement.get(2)));
-        mouseIndicator = new GraphicTrack( new Point(-50, -50));
-        
+        mouseIndicator = new GraphicTrack(new Point(-50, -50));
+
         addMouseListener(this);
         addMouseMotionListener(this);
     }
@@ -94,8 +90,9 @@ public class MapPanel extends JPanel implements MouseListener, MouseMotionListen
             g.drawImage(imageMap, 0, 0, this);
             if (grafoVisible)
             {
-                for (GraphicObject element : graphElement)
+                for (Iterator<GraphicObject> it = graphElement.descendingIterator(); it.hasNext();)
                 {
+                    GraphicObject element = it.next();
                     element.draw(g);
                 }
             }
@@ -108,21 +105,23 @@ public class MapPanel extends JPanel implements MouseListener, MouseMotionListen
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) 
+    public void mouseClicked(MouseEvent e)
     {
     }
 
     @Override
-    public void mousePressed(MouseEvent e) 
+    public void mousePressed(MouseEvent e)
     {
     }
 
     @Override
-    public void mouseReleased(MouseEvent e) {
+    public void mouseReleased(MouseEvent e)
+    {
     }
 
     @Override
-    public void mouseEntered(MouseEvent e) {
+    public void mouseEntered(MouseEvent e)
+    {
         int x = e.getX();
         int y = e.getY();
         mouseIndicator.getP().setLocation(x, y);
@@ -130,17 +129,20 @@ public class MapPanel extends JPanel implements MouseListener, MouseMotionListen
     }
 
     @Override
-    public void mouseExited(MouseEvent e) {
+    public void mouseExited(MouseEvent e)
+    {
         mouseIndicator.getP().setLocation(-50, -50);
         repaint();
     }
 
     @Override
-    public void mouseDragged(MouseEvent e) {
+    public void mouseDragged(MouseEvent e)
+    {
     }
 
     @Override
-    public void mouseMoved(MouseEvent e) {
+    public void mouseMoved(MouseEvent e)
+    {
         int x = e.getX();
         int y = e.getY();
         mouseIndicator.getP().setLocation(x, y);

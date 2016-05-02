@@ -1,5 +1,6 @@
 package com.oagsoft.wazgle.data;
 
+import com.oagsoft.wazgle.tools.Geometrics;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -32,16 +33,20 @@ public class GraphicEdge extends GraphicObject
     public void draw(Graphics2D g)
     {
         Point pIni = vIni.getP();
-        double rIni = vIni.getRadio()/2;
+        double rIni = vIni.getRadio() / 2;
         Point pFin = vFin.getP();
-        double rFin = vFin.getRadio()/2;
+        double rFin = vFin.getRadio() / 2;
 
-        Point pAuxIni = pIni;
-        Point pAuxFin = pFin;
-        int ancho = 2;
+        double d = Point.distance(pIni.x, pIni.y, pFin.x, pFin.y);
+        double tI = rIni / d;
+        double tF = (d - rFin) / d;
+
+        Point pAuxIni = Geometrics.calcularPunto(pIni, pFin, tI);
+        Point pAuxFin = Geometrics.calcularPunto(pIni, pFin, tF);
+        int ancho = (int) (1.0 * peso);
 
         g.setStroke(new BasicStroke(ancho));
-        g.setColor(Color.BLUE);
+        g.setColor(new Color(0, 0, 255, 155));
         g.drawLine(pAuxIni.x + (int) rIni, pAuxIni.y + (int) rIni, pAuxFin.x + (int) rFin, pAuxFin.y + (int) rFin);
 
     }

@@ -1,11 +1,14 @@
 package com.oagsoft.wazgle.app;
 
+import com.oagsoft.wazgle.data.GraphicObject;
+import com.oagsoft.wazgle.tools.FactoryGraph;
 import com.oagsoft.wazgle.view.MapPanel;
 import com.oagsoft.wazgle.tools.FactoryItem;
 import com.sun.glass.events.KeyEvent;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -19,6 +22,7 @@ public class Aplication extends JFrame implements ActionListener
 {
 
     private MapPanel panel;
+    private LinkedList<GraphicObject> elementsGraph;
 
     public Aplication(String title)
     {
@@ -33,7 +37,10 @@ public class Aplication extends JFrame implements ActionListener
     //<editor-fold defaultstate="collapsed" desc="Metodo :: 'createGUI()'">
     private void createGUI()
     {
-        panel = new MapPanel("MiMapa.png");
+        // TODO: Esta linea se debe reemplazar por la lectura del archivo xml.
+        elementsGraph = FactoryGraph.create();
+
+        panel = new MapPanel("MiMapa.png", elementsGraph);
         add(BorderLayout.CENTER, panel);
         setJMenuBar(createBarMenu());
         setSize(panel.getMapSize());
@@ -57,7 +64,7 @@ public class Aplication extends JFrame implements ActionListener
         subMenu.addSeparator();
         subMenu.add(FactoryItem.createMenuItem("Salir", "salir", this, KeyEvent.VK_S));
         miBarraMenu.add(subMenu);
-        
+
         subMenu = new JMenu("Herramientas");
         subMenu.add(FactoryItem.createMenuItem("Mostrar Grafo", "mostrarGrafo", this, KeyEvent.VK_M));
         miBarraMenu.add(subMenu);
@@ -78,9 +85,15 @@ public class Aplication extends JFrame implements ActionListener
 
         switch (command)
         {
-            case "mostrarGrafo": mostrarGrafo((JMenuItem)e.getSource());break;
-            case "ocultarGrafo": ocultarGrafo((JMenuItem)e.getSource());break;
-            case "salir": salir(); break;
+            case "mostrarGrafo":
+                mostrarGrafo((JMenuItem) e.getSource());
+                break;
+            case "ocultarGrafo":
+                ocultarGrafo((JMenuItem) e.getSource());
+                break;
+            case "salir":
+                salir();
+                break;
         }
     }
 
@@ -94,10 +107,10 @@ public class Aplication extends JFrame implements ActionListener
         dispose();
     }
     // </editor-fold>
-    
+
     /**
-     * Este método es el encargado de ocultar el grafo del area visible. 
-     * Ademas actualiza la opcion del menu.
+     * Este método es el encargado de ocultar el grafo del area visible. Ademas
+     * actualiza la opcion del menu.
      */
     // <editor-fold defaultstate="collapsed" desc="Método :: 'ocultarGrafo ()'">
     private void ocultarGrafo(JMenuItem b)
@@ -110,8 +123,8 @@ public class Aplication extends JFrame implements ActionListener
     // </editor-fold>
 
     /**
-     * Este método es el encargado de mostrar el grafo del area visible. 
-     * Ademas actualiza la opcion del menu.
+     * Este método es el encargado de mostrar el grafo del area visible. Ademas
+     * actualiza la opcion del menu.
      */
     // <editor-fold defaultstate="collapsed" desc="Método :: 'mostrarNodos ()'">
     private void mostrarGrafo(JMenuItem b)

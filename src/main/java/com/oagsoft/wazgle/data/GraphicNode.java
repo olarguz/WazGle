@@ -11,11 +11,12 @@ import java.awt.Point;
  */
 public class GraphicNode extends GraphicObject
 {
+
     private Point p;
     private int radio;
     private boolean seleccionado;
-    
-    public GraphicNode( Point p, int radio, boolean selecionado)
+
+    public GraphicNode(Point p, int radio, boolean selecionado)
     {
         this.p = p;
         this.radio = radio;
@@ -31,7 +32,7 @@ public class GraphicNode extends GraphicObject
     {
         return radio;
     }
-    
+
     /**
      * Get the value of seleccionado
      *
@@ -53,16 +54,16 @@ public class GraphicNode extends GraphicObject
     }
 
     @Override
-    public void draw ( Graphics2D g)
+    public void draw(Graphics2D g)
     {
         int borde = 2;
         Color color = new Color(250, 50, 50);
-        if ( seleccionado)
+        if (seleccionado)
         {
-            borde = 3;
+            borde = 4;
             color = new Color(250, 0, 0);
         }
-        
+
         g.setStroke(new BasicStroke(borde));
         g.setColor(new Color(10, 10, 250, 50));
         g.fillOval(p.x, p.y, radio, radio);
