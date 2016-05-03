@@ -26,7 +26,7 @@ public class GraphicEdge extends GraphicObject
 
     public GraphicEdge(GraphicNode vIni, GraphicNode vFin)
     {
-        this(vIni, vFin, 1);
+        this(vIni, vFin, 3);
     }
 
     @Override

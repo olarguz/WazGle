@@ -26,13 +26,13 @@ public class FactoryGraph
         
         LinkedList<GraphicObject> graphElement = new LinkedList<>();
         
-        graphElement.add(new GraphicNode(new Point(25, 140), 20, false));       //  0
-        graphElement.add(new GraphicNode(new Point(55, 205), 20, false));       //  1
-        graphElement.add(new GraphicNode(new Point(90, 280), 20, true));        //  2
-        graphElement.add(new GraphicNode(new Point(130, 278), 20, false));      //  3
-        graphElement.add(new GraphicNode(new Point(180, 274), 20, false));      //  4
-        graphElement.add(new GraphicNode(new Point(184, 315), 20, false));      //  5
-        graphElement.add(new GraphicNode(new Point(138, 382), 20, false));      //  6
+        graphElement.add(new GraphicNode(new Point(17, 105), 20, false));       //  0
+        graphElement.add(new GraphicNode(new Point(23, 188), 20, false));       //  1
+        graphElement.add(new GraphicNode(new Point(23, 265), 20, true));        //  2
+        graphElement.add(new GraphicNode(new Point(141, 265), 20, false));      //  3
+        graphElement.add(new GraphicNode(new Point(135, 185), 20, false));      //  4
+        graphElement.add(new GraphicNode(new Point(123, 88), 20, false));      //  5
+        graphElement.add(new GraphicNode(new Point(133, 369), 20, false));      //  6
         
         graphElement.add(new GraphicEdge((GraphicNode) graphElement.get(0), (GraphicNode) graphElement.get(1)));
         graphElement.add(new GraphicEdge((GraphicNode) graphElement.get(1), (GraphicNode) graphElement.get(2)));

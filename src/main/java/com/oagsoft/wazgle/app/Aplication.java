@@ -40,7 +40,7 @@ public class Aplication extends JFrame implements ActionListener
         // TODO: Esta linea se debe reemplazar por la lectura del archivo xml.
         elementsGraph = FactoryGraph.create();
 
-        panel = new MapPanel("MiMapa.png", elementsGraph);
+        panel = new MapPanel("ImgMap.png", "ImgSat.png", elementsGraph);
         add(BorderLayout.CENTER, panel);
         setJMenuBar(createBarMenu());
         setSize(panel.getMapSize());
@@ -67,6 +67,7 @@ public class Aplication extends JFrame implements ActionListener
 
         subMenu = new JMenu("Herramientas");
         subMenu.add(FactoryItem.createMenuItem("Mostrar Grafo", "mostrarGrafo", this, KeyEvent.VK_M));
+        subMenu.add(FactoryItem.createMenuItem("Imagen Satelite", "imagenSatelite", this, KeyEvent.VK_P));
         miBarraMenu.add(subMenu);
 
         return miBarraMenu;
@@ -90,6 +91,12 @@ public class Aplication extends JFrame implements ActionListener
                 break;
             case "ocultarGrafo":
                 ocultarGrafo((JMenuItem) e.getSource());
+                break;
+            case "imagenSatelite": 
+                imagenSatelite((JMenuItem) e.getSource());
+                break;
+            case "imagenPlano":
+                imagenPlano((JMenuItem) e.getSource());
                 break;
             case "salir":
                 salir();
@@ -135,6 +142,20 @@ public class Aplication extends JFrame implements ActionListener
         panel.repaint();
     }
     // </editor-fold>
+
+    private void imagenSatelite(JMenuItem b) {
+        b.setText("Imagen Plano");
+        b.setActionCommand("imagenPlano");
+        panel.setImagenPlano(true);
+        panel.repaint();
+    }
+
+    private void imagenPlano(JMenuItem b) {
+        b.setText("Imagen Satelite");
+        b.setActionCommand("imagenSatelite");
+        panel.setImagenPlano(false);
+        panel.repaint();
+    }
 
     /**
      * @param args the command line arguments
