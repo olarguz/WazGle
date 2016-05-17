@@ -1,8 +1,11 @@
 package com.oagsoft.wazgle.view;
 
+import com.oagsoft.wazgle.data.GraphicCombo;
+import com.oagsoft.wazgle.data.GraphicEdge;
 import com.oagsoft.wazgle.data.GraphicNode;
 import com.oagsoft.wazgle.data.GraphicObject;
 import com.oagsoft.wazgle.data.GraphicTrack;
+import com.oagsoft.wazgle.tools.FactoryCombo;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -33,6 +36,9 @@ public class MapPanel extends JPanel implements MouseListener, MouseMotionListen
     private boolean grafoVisible;
     private GraphicTrack mouseIndicator;
 
+    private GraphicCombo comboIni;
+    private GraphicCombo comboFin;
+    
     public MapPanel(String fileA, String fileB, LinkedList<GraphicObject> graphElement)
     {
         try
@@ -50,6 +56,7 @@ public class MapPanel extends JPanel implements MouseListener, MouseMotionListen
         grafoVisible = false;
 
         mouseIndicator = new GraphicTrack(new Point(-50, -50));
+        comboIni = comboFin = null;
 
         addMouseListener(this);
         addMouseMotionListener(this);
@@ -98,6 +105,14 @@ public class MapPanel extends JPanel implements MouseListener, MouseMotionListen
                     GraphicObject element = it.next();
                     element.draw(g);
                 }
+                if(comboIni != null)
+                {
+                    comboIni.draw(g);
+                }
+                if(comboFin != null)
+                {
+                    comboFin.draw(g);
+                }
             }
             mouseIndicator.draw(g);
         }
@@ -110,6 +125,17 @@ public class MapPanel extends JPanel implements MouseListener, MouseMotionListen
     @Override
     public void mouseClicked(MouseEvent e)
     {
+        if ( comboIni != null && comboFin == null)
+        {
+            Point p = new Point(e.getX(), e.getY());
+            comboFin = FactoryCombo.create(p, graphElement);
+        }
+        else if ( comboIni == null)
+        {
+            Point p = new Point(e.getX(), e.getY());
+            comboIni = FactoryCombo.create(p, graphElement);
+        }
+        repaint();
     }
 
     @Override
